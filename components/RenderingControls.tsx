@@ -7,7 +7,10 @@ export function RenderingControls() {
   const typeParam = useSearchParams().get('type') || renderTypes.default;
 
   const handleModeClick = (type: RenderType) => {
-    window.location.href = `/?type=${type}`;
+    const url = new URL(window.location.href);
+    url.searchParams.set('type', type);
+    url.pathname = window.location.pathname;
+    window.location.href = url.toString();
   };
 
   const getButtonVariant = (type: RenderType) => {
@@ -21,12 +24,6 @@ export function RenderingControls() {
         onClick={() => handleModeClick(renderTypes.default)}
       >
         Default with Errors
-      </Button>
-      <Button
-        variant={getButtonVariant(renderTypes.wrapperEffect)}
-        onClick={() => handleModeClick(renderTypes.wrapperEffect)}
-      >
-        Wrapper with useEffect
       </Button>
       <Button
         variant={getButtonVariant(renderTypes.wrapperEffectWithFallback)}
@@ -45,12 +42,6 @@ export function RenderingControls() {
         onClick={() => handleModeClick(renderTypes.suspense)}
       >
         With Suspense
-      </Button>
-      <Button
-        variant={getButtonVariant(renderTypes.selfClientCheck)}
-        onClick={() => handleModeClick(renderTypes.selfClientCheck)}
-      >
-        With Self checking component
       </Button>
     </div>
   );

@@ -1,8 +1,6 @@
 import { ClientOnlyWithDynamic } from '@/components/ClientOnlyWithDynamic';
-import { ClientOnlyWithEffect } from '@/components/ClientOnlyWithEffect';
 import { ComponentWithHydrationError } from '@/components/ComponentWithHydrationError';
 import { Suspense } from 'react';
-import { SelfCheckingComponent } from '@/components/SelfCheckingComponen';
 import { RenderingControls } from '@/components/RenderingControls';
 import { RenderType, renderTypes } from '@/constants';
 import { ClientOnlyWithFallback } from '@/components/ClientOnlyWithFallback';
@@ -20,14 +18,6 @@ export default async function Home(props: {
       return <ComponentWithHydrationError />;
     }
 
-    if (type === renderTypes.wrapperEffect) {
-      return (
-        <ClientOnlyWithEffect>
-          <ComponentWithHydrationError />
-        </ClientOnlyWithEffect>
-      );
-    }
-
     if (type === renderTypes.wrapperDynamic) {
       return (
         <ClientOnlyWithDynamic>
@@ -42,10 +32,6 @@ export default async function Home(props: {
           <ComponentWithHydrationError />
         </Suspense>
       );
-    }
-
-    if (type === renderTypes.selfClientCheck) {
-      return <SelfCheckingComponent />;
     }
 
     if (type === renderTypes.wrapperEffectWithFallback) {
@@ -71,7 +57,7 @@ export default async function Home(props: {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       {type === renderTypes.default || type === renderTypes.suspense ? (
-        <span className="inline-block px-4 py-2 bg-red-100 text-red-800 rounded-lg shadow-sm text-sm font-medium">
+        <span className="inline-block px-4 py-2 bg-destructive/10 text-destructive rounded-lg shadow-sm text-sm font-medium">
           ⚠️ Open the console or look at the error indicator on bottom-left to
           see hydration errors
         </span>

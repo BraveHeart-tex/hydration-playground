@@ -1,10 +1,8 @@
 export const renderTypes = {
-  default: "default",
-  wrapperEffect: "wrapperEffect",
-  wrapperDynamic: "wrapperDynamic",
-  suspense: "suspense",
-  selfClientCheck: "selfClientCheck",
-  wrapperEffectWithFallback: "wrapperEffectWithFallback"
+  default: 'default',
+  wrapperDynamic: 'wrapperDynamic',
+  suspense: 'suspense',
+  wrapperEffectWithFallback: 'wrapperEffectWithFallback',
 } as const;
 
 export type RenderType = (typeof renderTypes)[keyof typeof renderTypes];
