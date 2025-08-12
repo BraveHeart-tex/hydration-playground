@@ -1,89 +1,61 @@
-import { ClientOnlyWithDynamic } from "../components/ClientOnlyWithDynamic";
-import { ClientOnlyWithEffect } from "../components/ClientOnlyWithEffect";
-import { ComponentWithHydrationError } from "../components/ComponentWithHydrationError";
-import { Suspense } from "react";
-import { SelfCheckingComponent } from "../components/SelfCheckingComponen";
-import { RenderingControls } from "../components/RenderingControls";
-import { RenderType, renderTypes } from "@/constants";
-import { ClientOnlyWithFallback } from "../components/ClientOnlyWithFallback";
+import { DemoCard } from '@/components/DemoCard';
+import { PLAYGROUND_ROUTES } from '@/lib/constants';
 
-export default async function Home(props: {
-  searchParams: Promise<{
-    type?: RenderType;
-  }>;
-}) {
-  const searchParams = await props.searchParams;
-  const type = searchParams.type || "default";
+const overviewItems = [
+  {
+    title: 'Independent Boundaries',
+    description:
+      'See how components wrapped in separate Suspense boundaries render independently without blocking each other.',
+    href: PLAYGROUND_ROUTES.independentSuspense,
+  },
+  {
+    title: 'Nested Boundaries',
+    description:
+      'Explore nested Suspense boundaries that create progressive loading experiences with cascading fallbacks.',
+    href: PLAYGROUND_ROUTES.nestedSuspense,
+  },
+  {
+    title: 'Above-the-Fold Rendering',
+    description:
+      'Learn how to prioritize critical above-the-fold content while progressively loading below-the-fold sections.',
+    href: PLAYGROUND_ROUTES.aboveTheFold,
+  },
+];
 
-  const renderContent = () => {
-    if (type === renderTypes.default) {
-      return <ComponentWithHydrationError />;
-    }
-
-    if (type === renderTypes.wrapperEffect) {
-      return (
-        <ClientOnlyWithEffect>
-          <ComponentWithHydrationError />
-        </ClientOnlyWithEffect>
-      );
-    }
-
-    if (type === renderTypes.wrapperDynamic) {
-      return (
-        <ClientOnlyWithDynamic>
-          <ComponentWithHydrationError />
-        </ClientOnlyWithDynamic>
-      );
-    }
-
-    if (type === renderTypes.suspense) {
-      return (
-        <Suspense>
-          <ComponentWithHydrationError />
-        </Suspense>
-      );
-    }
-
-    if (type === renderTypes.selfClientCheck) {
-      return <SelfCheckingComponent />;
-    }
-
-    if (type === renderTypes.wrapperEffectWithFallback) {
-      return (
-        <ClientOnlyWithFallback
-          fallback={
-            <div
-              className="p-4 border-l-4 border-transparent bg-gray-100 text-gray-400 font-mono text-sm shadow rounded"
-              aria-hidden="true"
-            >
-              ⏳ Loading component...
-            </div>
-          }
-        >
-          <ComponentWithHydrationError />
-        </ClientOnlyWithFallback>
-      );
-    }
-
-    return "Unsupported type";
-  };
-
+export default async function OverviewPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      {type === renderTypes.default || type === renderTypes.suspense ? (
-        <span className="inline-block px-4 py-2 bg-red-100 text-red-800 rounded-lg shadow-sm text-sm font-medium">
-          ⚠️ Open the console or look at the error indicator on bottom-left to
-          see hydration errors
-        </span>
-      ) : (
-        <span className="inline-block px-4 py-2 bg-green-100 text-green-800 rounded-lg shadow-sm text-sm font-medium">
-          No hydration errors expected
-        </span>
-      )}
+    <div className="max-w-6xl mx-auto p-8 min-h-screen flex flex-col items-center justify-center">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-foreground mb-4">
+          Rendering Demonstrations
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Explore different patterns and behaviors of React Suspense boundaries
+          with interactive examples and real-time loading demonstrations.
+        </p>
+      </div>
 
-      <div className="grid gap-4 w-full">
-        <RenderingControls />
-        {renderContent()}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {overviewItems.map((item, index) => (
+          <DemoCard
+            key={index}
+            title={item.title}
+            description={item.description}
+            href={item.href}
+          />
+        ))}
+      </div>
+
+      <div className="mt-12 bg-muted rounded-lg p-6">
+        <h2 className="text-lg font-semibold text-foreground mb-2">
+          Key Concepts Demonstrated
+        </h2>
+        <ul className="text-muted-foreground space-y-1 text-sm">
+          <li>• Suspense boundaries don&apos;t block sibling components</li>
+          <li>• Nested boundaries create progressive loading experiences</li>
+          <li>• Above-the-fold content should render immediately</li>
+          <li>• Proper skeleton fallbacks improve perceived performance</li>
+        </ul>
       </div>
     </div>
   );

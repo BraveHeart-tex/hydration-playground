@@ -1,8 +1,8 @@
-import Header from "@/components/Header";
-import HeaderSkeleton from "@/components/HeaderSkeleton";
-import ItemFeed from "@/components/ItemFeed";
-import ItemFeedSkeleton from "@/components/ItemFeedSkeleton";
-import { Suspense } from "react";
+import Header from '@/components/Header';
+import HeaderSkeleton from '@/components/HeaderSkeleton';
+import ItemFeed from '@/components/ItemFeed';
+import ItemFeedSkeleton from '@/components/ItemFeedSkeleton';
+import { Suspense } from 'react';
 
 export default function SuspensePage() {
   return (
