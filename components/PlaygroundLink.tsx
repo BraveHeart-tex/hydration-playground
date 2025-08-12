@@ -1,5 +1,5 @@
 import Link, { LinkProps as NextLinkProps } from 'next/link';
-import { PlaygroundRoute } from '@/lib/constants';
+import { PlaygroundRoute } from '@/constants';
 
 type InternalLinkProps = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,

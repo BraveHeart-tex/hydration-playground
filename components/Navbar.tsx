@@ -1,7 +1,8 @@
 'use client';
 
 import AppLink from '@/components/PlaygroundLink';
-import { PLAYGROUND_ROUTES, PlaygroundRoute } from '@/lib/constants';
+import { PlaygroundRoute } from '@/constants';
+import { PLAYGROUND_ROUTES } from '@/constants';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

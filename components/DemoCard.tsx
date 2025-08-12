@@ -1,5 +1,5 @@
 import AppLink from '@/components/PlaygroundLink';
-import { PlaygroundRoute } from '@/lib/constants';
+import { PlaygroundRoute } from '@/constants';
 
 interface DemoCardProps {
   href: PlaygroundRoute;

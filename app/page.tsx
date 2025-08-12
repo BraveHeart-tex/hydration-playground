@@ -1,5 +1,5 @@
 import { DemoCard } from '@/components/DemoCard';
-import { PLAYGROUND_ROUTES } from '@/lib/constants';
+import { PLAYGROUND_ROUTES } from '@/constants';
 
 const overviewItems = [
   {

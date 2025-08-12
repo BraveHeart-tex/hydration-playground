@@ -55,22 +55,29 @@ export default async function Home(props: {
   };
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="max-w-6xl mx-auto p-8 min-h-screen flex flex-col items-center justify-center gap-8">
+      <div className="text-center max-w-2xl w-full">
+        <h1 className="text-4xl font-bold text-foreground mb-4">
+          React Hydration Error Demonstration
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          This page showcases different rendering patterns and highlights where
+          hydration errors may occur. Use the controls below to explore
+          scenarios.
+        </p>
+      </div>
       {type === renderTypes.default || type === renderTypes.suspense ? (
-        <span className="inline-block px-4 py-2 bg-destructive/10 text-destructive rounded-lg shadow-sm text-sm font-medium">
+        <span className="inline-block px-4 py-2 rounded-lg shadow-sm text-sm font-medium bg-destructive/10 text-destructive">
           ⚠️ Open the console or look at the error indicator on bottom-left to
           see hydration errors
         </span>
       ) : (
-        <span className="inline-block px-4 py-2 bg-green-100 text-green-800 rounded-lg shadow-sm text-sm font-medium">
+        <span className="inline-block px-4 py-2 rounded-lg shadow-sm text-sm font-medium bg-green-100 text-green-800">
           No hydration errors expected
         </span>
       )}
-
-      <div className="grid gap-4 w-full">
-        <RenderingControls />
-        {renderContent()}
-      </div>
+      <RenderingControls />
+      {renderContent()}
     </div>
   );
 }
