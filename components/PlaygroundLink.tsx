@@ -3,10 +3,11 @@ import { PlaygroundRoute } from '@/lib/constants';
 
 type InternalLinkProps = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  'href'
+  'href' | 'target'
 > &
   Omit<NextLinkProps, 'href'> & {
     href: PlaygroundRoute;
+    external?: false;
     target?: '_self' | undefined;
   };
 
@@ -15,7 +16,8 @@ type ExternalLinkProps = Omit<
   'href'
 > & {
   href: string;
-  target?: '_blank';
+  external: true;
+  target: '_blank';
 };
 
 type AppLinkProps = InternalLinkProps | ExternalLinkProps;

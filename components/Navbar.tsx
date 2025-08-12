@@ -1,14 +1,25 @@
 'use client';
 
+import AppLink from '@/components/PlaygroundLink';
+import { PLAYGROUND_ROUTES, PlaygroundRoute } from '@/lib/constants';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const navItems = [
-  { href: '/', label: 'Overview' },
-  { href: '/client-only-rendering', label: 'Client Only Rendering' },
-  { href: '/independent', label: 'Independent Boundaries' },
-  { href: '/nested', label: 'Nested Boundaries' },
-  { href: '/above-fold', label: 'Above-the-Fold' },
+const navItems: {
+  href: PlaygroundRoute;
+  label: string;
+}[] = [
+  { href: PLAYGROUND_ROUTES.home, label: 'Overview' },
+  {
+    href: PLAYGROUND_ROUTES.clientOnlyRendering,
+    label: 'Client Only Rendering',
+  },
+  {
+    href: PLAYGROUND_ROUTES.independentSuspense,
+    label: 'Independent Boundaries',
+  },
+  { href: PLAYGROUND_ROUTES.nestedSuspense, label: 'Nested Boundaries' },
+  { href: PLAYGROUND_ROUTES.aboveTheFold, label: 'Above-the-Fold' },
 ];
 
 export default function Navbar() {
@@ -24,7 +35,7 @@ export default function Navbar() {
             </Link>
             <div className="hidden md:flex space-x-6">
               {navItems.map((item) => (
-                <Link
+                <AppLink
                   key={item.href}
                   href={item.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -34,7 +45,7 @@ export default function Navbar() {
                   }`}
                 >
                   {item.label}
-                </Link>
+                </AppLink>
               ))}
             </div>
           </div>

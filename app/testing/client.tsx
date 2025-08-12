@@ -1,7 +1,6 @@
-"use client";
+'use client';
 
-import { PropsWithChildren } from "react";
-import { ServerComponent } from "./server";
+import { PropsWithChildren } from 'react';
 
 export function ClientContainer({ children }: PropsWithChildren) {
   return (

@@ -1,4 +1,5 @@
 export const PLAYGROUND_ROUTES = {
+  home: '/',
   aboveTheFold: '/above-the-fold',
   basicHydration: '/basic-hydration',
   clientOnlyRendering: '/client-only-rendering',
