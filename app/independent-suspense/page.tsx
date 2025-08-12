@@ -6,13 +6,11 @@ import { Suspense } from 'react';
 
 export default function SuspensePage() {
   return (
-    <main className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <main className="min-h-screen bg-primary/5 p-8">
+      <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Suspense Boundary Demo
-          </h1>
-          <p className="text-gray-600">
+          <h1 className="text-3xl font-bold mb-2">Suspense Boundary Demo</h1>
+          <p className="text-primary/60">
             Watch how components render independently - ItemFeed appears first,
             Header loads after
           </p>
