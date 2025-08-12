@@ -9,10 +9,15 @@ export default function SuspensePage() {
     <main className="min-h-screen bg-primary/5 p-8">
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Suspense Boundary Demo</h1>
+          <h1 className="text-3xl font-bold mb-2">
+            Independent Suspense Boundaries
+          </h1>
           <p className="text-primary/60">
-            Watch how components render independently - ItemFeed appears first,
-            Header loads after
+            Watch how components render independently.
+          </p>
+          <p className="text-primary/60">
+            ItemFeed appears first (1s), Header loads after (3s). Neither
+            component blocks the other from rendering.
           </p>
         </div>
 

@@ -1,20 +1,17 @@
+import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="w-full space-y-4">
       {/* Above the fold - Critical functionality that users need immediately */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="bg-background">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold text-emerald-600">LocalMarket</h1>
+            <h1 className="text-2xl font-bold">LocalMarket</h1>
             <div className="flex gap-4">
-              <button className="text-gray-600 hover:text-gray-900">
-                Sign In
-              </button>
-              <button className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">
-                Post Ad
-              </button>
+              <Button variant="outline">Sign In</Button>
+              <Button>Post Ad</Button>
             </div>
           </div>
 
@@ -23,24 +20,22 @@ export default function LandingPage() {
               <input
                 type="text"
                 placeholder="Search for anything..."
-                className="w-full px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 border rounded-lg text-lg focus:outline-none focus:ring-2"
               />
             </div>
-            <select className="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <select className="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2">
               <option>All Categories</option>
               <option>Vehicles</option>
               <option>Electronics</option>
               <option>Furniture</option>
               <option>Real Estate</option>
             </select>
-            <button className="bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700">
-              Search
-            </button>
+            <Button className="px-8 py-3 rounded-lg h-full">Search</Button>
           </div>
         </div>
       </header>
 
-      <section className="bg-gray-50 py-6">
+      <section className="bg-primary/5 py-6">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex gap-4 overflow-x-auto">
             {[
@@ -51,12 +46,9 @@ export default function LandingPage() {
               '💼 Jobs',
               '🔧 Services',
             ].map((category, index) => (
-              <button
-                key={index}
-                className="flex-shrink-0 bg-white px-6 py-3 rounded-lg border hover:border-emerald-500 hover:text-emerald-600 transition-colors"
-              >
+              <Button key={index} variant="outline">
                 {category}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -104,12 +96,14 @@ async function UrgentListingsSection() {
   ];
 
   return (
-    <section className="py-12 bg-red-50 border-l-4 border-red-500">
+    <section className="py-12 bg-destructive/5 border-l-4 border-destructive">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center gap-2 mb-8">
           <span className="text-2xl">⚡</span>
-          <h2 className="text-2xl font-bold text-red-700">Urgent Listings</h2>
-          <span className="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium">
+          <h2 className="text-2xl font-bold text-destructive">
+            Urgent Listings
+          </h2>
+          <span className="bg-destructive/10 text-destructive px-3 py-1 rounded-full text-sm font-medium">
             Time Sensitive
           </span>
         </div>
@@ -117,18 +111,20 @@ async function UrgentListingsSection() {
           {urgentListings.map((listing, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-sm border-2 border-red-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+              className="bg-background rounded-lg shadow-sm border-2 border-destructive/20 p-4 hover:shadow-md transition-shadow cursor-pointer"
             >
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-semibold text-lg">{listing.title}</h3>
-                <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                <span className="bg-destructive text-destructive-foreground px-2 py-1 rounded text-xs font-bold">
                   {listing.urgent}
                 </span>
               </div>
               <p className="text-2xl font-bold text-emerald-600 mb-2">
                 {listing.price}
               </p>
-              <p className="text-gray-500 text-sm">{listing.location}</p>
+              <p className="text-muted-foreground text-sm">
+                {listing.location}
+              </p>
             </div>
           ))}
         </div>
