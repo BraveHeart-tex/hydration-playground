@@ -24,6 +24,18 @@ export default function SuspensePage() {
         <Suspense fallback={<ItemFeedSkeleton />}>
           <ItemFeed />
         </Suspense>
+
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-8">
+          <h3 className="font-semibold text-yellow-800 mb-2">
+            What&apos;s happening:
+          </h3>
+          <ul className="text-yellow-700 text-sm space-y-1">
+            <li>• ItemFeed loads in 1 second and renders immediately</li>
+            <li>• Header takes 3 seconds but doesn&apos;t block ItemFeed</li>
+            <li>• Each Suspense boundary operates independently</li>
+            <li>• Users see content as soon as it&apos;s ready</li>
+          </ul>
+        </div>
       </div>
     </main>
   );
