@@ -1,21 +1,21 @@
-import { Suspense } from "react";
+import { UserIcon } from 'lucide-react';
+import { Suspense } from 'react';
 
 // Simulate API calls with different delays
 async function fetchUserProfile() {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   return {
-    name: "John Doe",
-    email: "john@example.com",
-    avatar: "/placeholder.svg?height=64&width=64",
+    name: 'John Doe',
+    email: 'john@example.com',
   };
 }
 
 async function fetchRecentActivity() {
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return [
-    { id: 1, action: "Created new project", time: "2 hours ago" },
-    { id: 2, action: "Updated profile", time: "5 hours ago" },
-    { id: 3, action: "Shared document", time: "1 day ago" },
+    { id: 1, action: 'Created new project', time: '2 hours ago' },
+    { id: 2, action: 'Updated profile', time: '5 hours ago' },
+    { id: 3, action: 'Shared document', time: '1 day ago' },
   ];
 }
 
@@ -33,13 +33,9 @@ async function UserProfile() {
   const profile = await fetchUserProfile();
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border">
+    <div className="bg-background p-6 rounded-lg shadow-sm border">
       <div className="flex items-center gap-4">
-        <img
-          src={profile.avatar || "/placeholder.svg"}
-          alt="User avatar"
-          className="w-16 h-16 rounded-full"
-        />
+        <UserIcon className="w-16 h-16 rounded-full" />
         <div>
           <h3 className="text-xl font-semibold">{profile.name}</h3>
           <p className="text-gray-600">{profile.email}</p>
@@ -53,7 +49,7 @@ async function RecentActivity() {
   const activities = await fetchRecentActivity();
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border">
+    <div className="bg-background p-6 rounded-lg shadow-sm border">
       <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
       <div className="space-y-3">
         {activities.map((activity) => (
@@ -96,12 +92,12 @@ async function StatsCards() {
 // Skeleton components
 function UserProfileSkeleton() {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border">
+    <div className="bg-background p-6 rounded-lg shadow-sm border">
       <div className="flex items-center gap-4">
-        <div className="w-16 h-16 bg-gray-200 rounded-full animate-pulse"></div>
+        <div className="w-16 h-16 bg-accent rounded-full animate-pulse"></div>
         <div className="space-y-2">
-          <div className="h-6 bg-gray-200 rounded animate-pulse w-32"></div>
-          <div className="h-4 bg-gray-200 rounded animate-pulse w-48"></div>
+          <div className="h-6 bg-accent rounded animate-pulse w-32"></div>
+          <div className="h-4 bg-accent rounded animate-pulse w-48"></div>
         </div>
       </div>
     </div>
@@ -110,13 +106,13 @@ function UserProfileSkeleton() {
 
 function RecentActivitySkeleton() {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm border">
-      <div className="h-6 bg-gray-200 rounded animate-pulse w-32 mb-4"></div>
+    <div className="bg-background p-6 rounded-lg shadow-sm border">
+      <div className="h-6 bg-accent rounded animate-pulse w-32 mb-4"></div>
       <div className="space-y-3">
         {[1, 2, 3].map((i) => (
           <div key={i} className="flex justify-between items-center py-2">
-            <div className="h-4 bg-gray-200 rounded animate-pulse w-40"></div>
-            <div className="h-3 bg-gray-200 rounded animate-pulse w-16"></div>
+            <div className="h-4 bg-accent rounded animate-pulse w-40"></div>
+            <div className="h-3 bg-accent rounded animate-pulse w-16"></div>
           </div>
         ))}
       </div>
@@ -128,9 +124,9 @@ function StatsCardsSkeleton() {
   return (
     <div className="grid grid-cols-3 gap-4">
       {[1, 2, 3].map((i) => (
-        <div key={i} className="bg-gray-50 p-4 rounded-lg text-center">
-          <div className="h-8 bg-gray-200 rounded animate-pulse mb-2"></div>
-          <div className="h-4 bg-gray-200 rounded animate-pulse w-16 mx-auto"></div>
+        <div key={i} className="bg-primary/5 p-4 rounded-lg text-center">
+          <div className="h-8 bg-accent rounded animate-pulse mb-2"></div>
+          <div className="h-4 bg-accent rounded animate-pulse w-16 mx-auto"></div>
         </div>
       ))}
     </div>
@@ -140,7 +136,7 @@ function StatsCardsSkeleton() {
 function DashboardSkeleton() {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="h-8 bg-gray-200 rounded animate-pulse w-48 mb-8"></div>
+      <div className="h-8 bg-accent rounded animate-pulse w-48 mb-8"></div>
       <div className="space-y-6">
         <StatsCardsSkeleton />
         <UserProfileSkeleton />
@@ -153,30 +149,28 @@ function DashboardSkeleton() {
 // Main Dashboard component with nested Suspense boundaries
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      {/* Outer Suspense boundary - wraps the entire dashboard */}
-      <Suspense fallback={<DashboardSkeleton />}>
-        <div className="max-w-4xl mx-auto p-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
+    // Outer Suspense boundary - wraps the entire dashboard
+    <Suspense fallback={<DashboardSkeleton />}>
+      <div className="w-full">
+        <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
 
-          <div className="space-y-6">
-            {/* Inner Suspense boundary for stats - loads fastest (1.5s) */}
-            <Suspense fallback={<StatsCardsSkeleton />}>
-              <StatsCards />
-            </Suspense>
+        <div className="space-y-6">
+          {/* Inner Suspense boundary for stats - loads fastest (1.5s) */}
+          <Suspense fallback={<StatsCardsSkeleton />}>
+            <StatsCards />
+          </Suspense>
 
-            {/* Inner Suspense boundary for user profile - loads in 2s */}
-            <Suspense fallback={<UserProfileSkeleton />}>
-              <UserProfile />
-            </Suspense>
+          {/* Inner Suspense boundary for user profile - loads in 2s */}
+          <Suspense fallback={<UserProfileSkeleton />}>
+            <UserProfile />
+          </Suspense>
 
-            {/* Inner Suspense boundary for activity - loads slowest (3s) */}
-            <Suspense fallback={<RecentActivitySkeleton />}>
-              <RecentActivity />
-            </Suspense>
-          </div>
+          {/* Inner Suspense boundary for activity - loads slowest (3s) */}
+          <Suspense fallback={<RecentActivitySkeleton />}>
+            <RecentActivity />
+          </Suspense>
         </div>
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 }
