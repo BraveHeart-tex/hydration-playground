@@ -1,7 +1,11 @@
 import { DemoCard } from '@/components/DemoCard';
-import { PLAYGROUND_ROUTES } from '@/constants';
+import { PLAYGROUND_ROUTES, PlaygroundRoute } from '@/constants';
 
-const overviewItems = [
+const overviewItems: {
+  title: string;
+  description: string;
+  href: PlaygroundRoute;
+}[] = [
   {
     title: 'Independent Boundaries',
     description:
@@ -20,6 +24,12 @@ const overviewItems = [
       'Learn how to prioritize critical above-the-fold content while progressively loading below-the-fold sections.',
     href: PLAYGROUND_ROUTES.aboveTheFold,
   },
+  {
+    title: 'Hydration Errors',
+    description:
+      'Explore common React hydration errors through an interactive playground that demonstrates each issue and offers practical solutions to ensure seamless server-to-client rendering.',
+    href: PLAYGROUND_ROUTES.hydrationErrors,
+  },
 ];
 
 export default async function OverviewPage() {
@@ -35,13 +45,14 @@ export default async function OverviewPage() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {overviewItems.map((item, index) => (
           <DemoCard
             key={index}
             title={item.title}
             description={item.description}
             href={item.href}
+            className="last:lg:col-span-3"
           />
         ))}
       </div>

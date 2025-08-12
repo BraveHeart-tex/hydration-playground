@@ -1,31 +1,31 @@
 import { ValueOf } from '@/lib/types';
 
-export const renderTypes = {
+export const RENDERING_TYPES = {
   default: 'default',
   wrapperDynamic: 'wrapperDynamic',
   suspense: 'suspense',
   wrapperEffectWithFallback: 'wrapperEffectWithFallback',
 } as const;
 
-// TODO: Set content and description to trigger different hydration errors in different ways within showcase components
-export const hydrationErrorModes = {
+export const HYDRATION_ERROR_MODES = {
   invalidDomNesting: 'invalidDomNesting',
   contentMismatch: 'contentMismatch',
   browserApis: 'browserApis',
-  environmentDependentRendering: 'environmentDependentRendering',
 } as const;
 
+export const HYDRATION_ERROR_MODE_SEARCH_PARAM_KEY =
+  'hydrationErrorMode' as const;
+
 export const PLAYGROUND_ROUTES = {
-  home: '/',
+  overview: '/',
   aboveTheFold: '/above-the-fold',
-  basicHydration: '/basic-hydration',
-  clientOnlyRendering: '/client-only-rendering',
+  hydrationErrors: '/hydration-errors',
   independentSuspense: '/independent-suspense',
   nestedSuspense: '/nested-suspense',
 } as const;
 
 export type PlaygroundRoute = ValueOf<typeof PLAYGROUND_ROUTES>;
 
-export type HydrationErrorMode = ValueOf<typeof hydrationErrorModes>;
+export type HydrationErrorMode = ValueOf<typeof HYDRATION_ERROR_MODES>;
 
-export type RenderType = ValueOf<typeof renderTypes>;
+export type RenderingType = ValueOf<typeof RENDERING_TYPES>;

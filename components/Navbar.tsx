@@ -10,10 +10,10 @@ const navItems: {
   href: PlaygroundRoute;
   label: string;
 }[] = [
-  { href: PLAYGROUND_ROUTES.home, label: 'Overview' },
+  { href: PLAYGROUND_ROUTES.overview, label: 'Overview' },
   {
-    href: PLAYGROUND_ROUTES.clientOnlyRendering,
-    label: 'Client Only Rendering',
+    href: PLAYGROUND_ROUTES.hydrationErrors,
+    label: 'Hydration Errors',
   },
   {
     href: PLAYGROUND_ROUTES.independentSuspense,
