@@ -1,63 +1,57 @@
-"use client";
-import { RenderType, renderTypes } from "@/constants";
-import { useSearchParams } from "next/navigation";
-
-const baseClasses =
-  "px-3 py-1.5 rounded-md text-sm font-medium transition-colors";
-const activeClasses = "bg-blue-600 text-white";
-const inactiveClasses = "bg-gray-100 hover:bg-gray-200 text-gray-800";
+'use client';
+import { Button } from '@/components/ui/button';
+import { RenderType, renderTypes } from '@/constants';
+import { useSearchParams } from 'next/navigation';
 
 export function RenderingControls() {
-  const typeParam = useSearchParams().get("type") || renderTypes.default;
+  const typeParam = useSearchParams().get('type') || renderTypes.default;
 
   const handleModeClick = (type: RenderType) => {
     window.location.href = `/?type=${type}`;
   };
 
-  const getButtonClass = (type: RenderType) => {
-    return `${baseClasses} ${
-      typeParam === type ? activeClasses : inactiveClasses
-    }`;
+  const getButtonVariant = (type: RenderType) => {
+    return type === typeParam ? 'default' : 'outline';
   };
 
   return (
     <div className="flex items-center gap-2 flex-wrap justify-center">
-      <button
-        className={getButtonClass(renderTypes.default)}
+      <Button
+        variant={getButtonVariant(renderTypes.default)}
         onClick={() => handleModeClick(renderTypes.default)}
       >
         Default with Errors
-      </button>
-      <button
-        className={getButtonClass(renderTypes.wrapperEffect)}
+      </Button>
+      <Button
+        variant={getButtonVariant(renderTypes.wrapperEffect)}
         onClick={() => handleModeClick(renderTypes.wrapperEffect)}
       >
         Wrapper with useEffect
-      </button>
-      <button
-        className={getButtonClass(renderTypes.wrapperEffectWithFallback)}
+      </Button>
+      <Button
+        variant={getButtonVariant(renderTypes.wrapperEffectWithFallback)}
         onClick={() => handleModeClick(renderTypes.wrapperEffectWithFallback)}
       >
         Wrapper with useEffect & fallback
-      </button>
-      <button
-        className={getButtonClass(renderTypes.wrapperDynamic)}
+      </Button>
+      <Button
+        variant={getButtonVariant(renderTypes.wrapperDynamic)}
         onClick={() => handleModeClick(renderTypes.wrapperDynamic)}
       >
         Wrapper with dynamic import & <pre>ssr : false</pre>
-      </button>
-      <button
-        className={getButtonClass(renderTypes.suspense)}
+      </Button>
+      <Button
+        variant={getButtonVariant(renderTypes.suspense)}
         onClick={() => handleModeClick(renderTypes.suspense)}
       >
         With Suspense
-      </button>
-      <button
-        className={getButtonClass(renderTypes.selfClientCheck)}
+      </Button>
+      <Button
+        variant={getButtonVariant(renderTypes.selfClientCheck)}
         onClick={() => handleModeClick(renderTypes.selfClientCheck)}
       >
         With Self checking component
-      </button>
+      </Button>
     </div>
   );
 }
